@@ -4,6 +4,7 @@ namespace NovaTesting\Assert;
 
 use closure;
 use Illuminate\Support\Arr;
+use NovaTesting\NovaDomain;
 use NovaTesting\NovaResponse;
 use Illuminate\Testing\Assert as PHPUnit;
 
@@ -71,7 +72,9 @@ trait AssertActions
         abort_if(strpos($endpoint, 'creation-fields'), 500, 'No actions on forms');
         abort_if(strpos($endpoint, 'update-fields'), 500, 'No actions on forms');
 
-        $this->novaActionResponse = new NovaResponse(
+        $endpoint = NovaDomain::getNovaDomain() . $endpoint;
+
+            $this->novaActionResponse = new NovaResponse(
             $this->parent->getJson($endpoint),
             $this->novaParameters,
             $this->parent

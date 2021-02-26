@@ -3,6 +3,7 @@
 namespace NovaTesting\Assert;
 
 use closure;
+use NovaTesting\NovaDomain;
 use NovaTesting\NovaResponse;
 use Illuminate\Testing\Assert as PHPUnit;
 
@@ -64,6 +65,8 @@ trait AssertLenses
 
         abort_if(strpos($endpoint, 'creation-fields'), 500, 'No lenses on forms');
         abort_if(strpos($endpoint, 'update-fields'), 500, 'No lenses on forms');
+
+        $endpoint = NovaDomain::getNovaDomain() . $endpoint;
 
         $this->novaLensResponse = new NovaResponse(
             $this->parent->getJson("$endpoint/lenses"),

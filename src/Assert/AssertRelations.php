@@ -4,6 +4,7 @@ namespace NovaTesting\Assert;
 
 use closure;
 use Laravel\Nova\Fields\HasOne;
+use NovaTesting\NovaDomain;
 use NovaTesting\NovaResponse;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\BelongsTo;
@@ -62,6 +63,8 @@ trait AssertRelations
                 $endpoint = "$endpoint?viaResourceId=$resourceId";
             }
         }
+
+        $endpoint = NovaDomain::getNovaDomain() . $endpoint;
 
         $this->novaRelationshipResponse[$key] = new NovaResponse(
             $this->parent->getJson($endpoint),

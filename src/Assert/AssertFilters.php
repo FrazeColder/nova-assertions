@@ -3,6 +3,7 @@
 namespace NovaTesting\Assert;
 
 use closure;
+use NovaTesting\NovaDomain;
 use NovaTesting\NovaResponse;
 use Illuminate\Testing\Assert as PHPUnit;
 
@@ -62,6 +63,8 @@ trait AssertFilters
 
         abort_if(strpos($endpoint, 'creation-fields'), 500, 'No filters on forms');
         abort_if(strpos($endpoint, 'update-fields'), 500, 'No filters on forms');
+
+        $endpoint = NovaDomain::getNovaDomain() . $endpoint;
 
         $this->novaFilterResponse = new NovaResponse(
             $this->parent->getJson("$endpoint/filters"),

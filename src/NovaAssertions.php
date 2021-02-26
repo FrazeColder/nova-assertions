@@ -12,7 +12,7 @@ trait NovaAssertions
     {
         $resource = $this->resolveUriKey($resource);
         $filters = $this->makeNovaFilters($resource, $filters);
-        $endpoint = "nova-api/$resource";
+        $endpoint = NovaDomain::getNovaDomain() . "nova-api/$resource";
         $json = $this->getJson("$endpoint?$filters");
 
         return new NovaResponse($json, compact('endpoint', 'resource'), $this);
@@ -21,7 +21,7 @@ trait NovaAssertions
     public function novaDetail($resource, $resourceId)
     {
         $resource = $this->resolveUriKey($resource);
-        $endpoint = "nova-api/$resource/$resourceId";
+        $endpoint = NovaDomain::getNovaDomain() . "nova-api/$resource/$resourceId";
         $json = $this->getJson($endpoint);
 
         return new NovaResponse($json, compact('endpoint', 'resource', 'resourceId'), $this);
@@ -30,7 +30,7 @@ trait NovaAssertions
     public function novaCreate($resource)
     {
         $resource = $this->resolveUriKey($resource);
-        $endpoint = "nova-api/$resource/creation-fields";
+        $endpoint = NovaDomain::getNovaDomain() . "nova-api/$resource/creation-fields";
         $json = $this->getJson($endpoint);
 
         return new NovaResponse($json, compact('endpoint', 'resource'), $this);
@@ -39,7 +39,7 @@ trait NovaAssertions
     public function novaEdit($resource, $resourceId)
     {
         $resource = $this->resolveUriKey($resource);
-        $endpoint = "nova-api/$resource/$resourceId/update-fields";
+        $endpoint = NovaDomain::getNovaDomain() . "nova-api/$resource/$resourceId/update-fields";
         $json = $this->getJson($endpoint);
 
         return new NovaResponse($json, compact('endpoint', 'resource', 'resourceId'), $this);
@@ -50,7 +50,7 @@ trait NovaAssertions
         $resource = $this->resolveUriKey($resource);
         $lens = $this->resolveUriKey($lens);
         $filters = $this->makeNovaFilters($resource, $filters);
-        $endpoint = "nova-api/$resource/lens/$lens";
+        $endpoint = NovaDomain::getNovaDomain() . "nova-api/$resource/lens/$lens";
         $json = $this->getJson("$endpoint?$filters");
 
         return new NovaResponse($json, compact('endpoint', 'resource', 'lens'), $this);

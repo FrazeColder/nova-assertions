@@ -3,6 +3,7 @@
 namespace NovaTesting\Assert;
 
 use closure;
+use NovaTesting\NovaDomain;
 use NovaTesting\NovaResponse;
 use Illuminate\Testing\Assert as PHPUnit;
 
@@ -81,6 +82,8 @@ trait AssertCards
 
         abort_if(strpos($endpoint, 'creation-fields'), 500, 'No cards on forms');
         abort_if(strpos($endpoint, 'update-fields'), 500, 'No cards on forms');
+
+        $endpoint = NovaDomain::getNovaDomain() . $endpoint;
 
         $this->novaCardResponse = new NovaResponse(
             $this->parent->getJson($endpoint),
